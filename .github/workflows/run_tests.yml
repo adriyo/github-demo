@@ -20,8 +20,17 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Generate keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > keystore_base64.jks
+
       - name: Generate empty secrets.properties
-        run: touch secrets.properties
+        run: |
+          touch secrets.properties
+          echo KEY_ALIAS=${{ secrets.KEYSTORE_ALIAS }} >> secrets.properties
+          echo KEY_PASSWORD=${{ secrets.DEMO_APP_PASSWORD }} >> secrets.properties
+          echo KEY_STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} >> secrets.properties
+          echo KEY_STORE_FILE=keystore_base64.jks >> secrets.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
