@@ -132,18 +132,21 @@ fun UserList(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
         )
-        Box(Modifier.fillMaxWidth()) {
-            if (uiState.message != null) {
-                ErrorScreen(
-                    error = uiState.message,
-                    onRefreshClick = onRefreshUsers
-                )
-            } else if (uiState.users.isNotEmpty()) {
-                val users = if (searchInput.isEmpty()) {
-                    uiState.users
-                } else {
-                    uiState.users.filter { "${it.login}".contains(searchInput, ignoreCase = true) }
-                }
+        if (!uiState.message.isNullOrEmpty()) {
+            ErrorScreen(
+                error = uiState.message,
+                onRefreshClick = onRefreshUsers
+            )
+        } else {
+            val users = if (searchInput.isEmpty()) {
+                uiState.users
+            } else {
+                uiState.users.filter { "${it.login}".contains(searchInput, ignoreCase = true) }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
                 when (listType) {
                     UserListType.GRID -> {
                         LazyVerticalGrid(
@@ -184,13 +187,13 @@ fun UserList(
                         }
                     }
                 }
-            }
 
-            PullRefreshIndicator(
-                refreshing = uiState.isLoading,
-                state = pullRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter),
-            )
+                PullRefreshIndicator(
+                    refreshing = uiState.isLoading,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter),
+                )
+            }
         }
     }
 }
