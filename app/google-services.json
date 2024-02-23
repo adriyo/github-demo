@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663657853580",
+    "project_id": "github-demo-b2d31",
+    "storage_bucket": "github-demo-b2d31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663657853580:android:63ec297ac7f4349d5f01a9",
+        "android_client_info": {
+          "package_name": "com.adriyo.github"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK45J1vqZ2yyYAhSg3b5OfNFi9bksq-Z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
